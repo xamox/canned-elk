@@ -24,7 +24,7 @@ Running
 --------------------------------------------
 Very simple, just enter in the directory and run the single command below.
 
-  canned-elk-dir/> docker-compose up -d
+    canned-elk-dir/> docker-compose up -d
 
 That will take a few seconds and is setup to generate 40,000 random data entries into the ELK stack.  This will be taxing on your system, but once it's done generating data the system should settle back down.
 
@@ -67,5 +67,5 @@ Shutting down
 --------------------------------------------
 It's very easy to remove the old data and clean up the environment
 
-  > docker-compose down
+    > docker-compose down
 
