@@ -1,21 +1,44 @@
-logstash:
-    build: logstash-contrib
-    volumes:
-        - logstash-contrib:/config/
-    command: logstash -f /config/logstash.conf
-    ports:
-        - "25826:25826"
-    links:
-        - elasticsearch
+version: '2'
 
-kibana:
-    build: kibana
-    links:
-        - elasticsearch
-    ports:
-        - "5601:5601"
+networks:
+    elk:
+        driver: bridge
 
-elasticsearch:
-    build: elasticsearch
-    ports:
-        - "9200:9200"
+services:
+    elasticsearch:
+        image: elasticsearch:2.3.3
+        hostname: elasticsearch
+        ports:
+            - "9200:9200"
+        networks:
+            - elk
+    es_slave:
+        image: elasticsearch:2.3.3
+        networks:
+            - elk
+        depends_on:
+            - elasticsearch
+        command: elasticsearch --discovery.zen.ping.unicast.hosts=elasticsearch
+
+    logstash:
+        image: logstash:2.3.3
+        hostname: logstash
+        networks:
+            - elk
+        volumes:
+            - ./logstash.conf:/config/logstash.conf
+        depends_on:
+            - elasticsearch
+        command: logstash -f /config/logstash.conf
+
+    kibana:
+        image: kibana:4.5.1
+        hostname: kibana
+        networks:
+            - elk
+        depends_on:
+            - elasticsearch
+            - logstash
+        ports:
+            - "5601:5601"
+
