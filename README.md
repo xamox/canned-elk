@@ -42,6 +42,7 @@ It is very easy to scale up the cluster and to verify it has been scaled up.
 From your host system you can run curl to check the status.
 
   > curl localhost:9200/_cat/nodes
+  
   172.24.0.2 172.24.0.2 8 87 0.50 d * Honcho       
   172.24.0.3 172.24.0.3 7 87 0.50 d m Richard Fisk 
 
@@ -53,6 +54,7 @@ Now let's make the cluster have 5 nodes (master + 4 slaves):
 Then if wait a little bit (~30-60 seconds) the nodes should have started and auto-joined the cluster.  To verify you can run curl again to confirm.
 
   > curl localhost:9200/_cat/nodes
+  
   172.24.0.6 172.24.0.6 7 95 0.74 d m Mephisto       
   172.24.0.2 172.24.0.2 3 95 0.74 d * Honcho         
   172.24.0.8 172.24.0.8 7 95 0.74 d m Melody Guthrie 
