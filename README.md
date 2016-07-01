@@ -48,7 +48,7 @@ From your host system you can run curl to check the status.
 
 Now let's make the cluster have 5 nodes (master + 4 slaves):
 
-  canned-elk-dir/> docker-compose scale es_slave=4
+    canned-elk-dir/> docker-compose scale es_slave=4
 
 Then if wait a little bit (~30-60 seconds) the nodes should have started and auto-joined the cluster.  To verify you can run curl again to confirm.
 
